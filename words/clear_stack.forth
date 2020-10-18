@@ -1,0 +1,1 @@
+: clear_stack 0 begin drop depth 0 = until ;

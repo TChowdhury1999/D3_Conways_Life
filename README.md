@@ -3,7 +3,11 @@ Physics Year 3 lab experiment using Forth to investigate Conway's Life
 Tanjim Chowdhury
 
 22/10/20
+
 Folder called words contains words made whilst learning Forth or otherwise which will be useful for creating Conway's Life
+
 Folder called exercises contains files and words created whilst learning Forth that are not directly applicable to creating the simulation
+
 Folder called helper_files contains files provided by Imperial College London (Roland Smith) that were used to help understanding and directly used to create Conway's Life
+
 Folder called files contains input/output files for the simulation.

@@ -15,15 +15,14 @@ variable index_y
 
 : i_to_xy dup n @ / 1+ over n @ mod 1+ swap rot drop ;
 
-: make_n_array 
-  n @ make_array 
-  { ON STACK: life array address, n, neighbours_array address}
+: make_n_array 															{ makes and stores the neighbours}
+  n @ make_array 														{ array                          }
   neighbours_array !
 ;
 
 { ON STACK: }
 
-: view_n_array
+: show_n_array
   neighbours_array @ n @ show_array
 ;
 

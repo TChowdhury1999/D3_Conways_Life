@@ -7,12 +7,12 @@
   returns 1 if cell will always be alive
   returns 2 if no effect }
   
-: neighbour_rules cr                                   							
+: neighbour_rules                                  							
 	case
 		0 of 0 endof
 		1 of 0 endof
-		2 of 1 endof
-		3 of 2 endof
+		2 of 2 endof
+		3 of 1 endof
 		4 of 0 endof
 		5 of 0 endof
 		6 of 0 endof
@@ -25,7 +25,7 @@
   returns 0 if cell will be dead
   returns 1 if cell will be alive }
 
-: apply_rules cr neighbour_rules
+: apply_rules neighbour_rules
 	case
 		0 of 0 endof
 		1 of 1 endof

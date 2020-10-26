@@ -204,13 +204,13 @@ REQUIRES RND
 400 constant Update_Timer    { Sets update rate of windows - modest delay   }
                                { Smaller = faster refresh                     }
 
-5 Constant Rect_Size           { Length of edges of rectangle used to display }
+25 Constant Rect_Size           { Length of edges of rectangle used to display }
                                { life, must be >= 3 or blank display all balck}
 
 
-30  constant world_x_size     { x size of the world matrix }
+10  constant world_x_size     { x size of the world matrix }
 
-30  constant world_y_size     { y size of the world matrix }
+10  constant world_y_size     { y size of the world matrix }
 
 
 
@@ -240,13 +240,20 @@ life_array_32_bit @ Life_array @ n @ square cells move
 
 
 
+save_measurements
 
-: Life                     
+: Life
   next_gen
+  save_measurements
+  copy_array_2_to_1
   fill_life_array_32_bit
   life_array_32_bit @ Life_array @ n @ square cells move
   Life_Array               
 ;
+
+
+
+
 
 
 : Life>Rect                                                   { Turn Life Data into a series of rectangle         }

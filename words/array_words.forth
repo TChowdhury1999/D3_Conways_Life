@@ -1,7 +1,8 @@
+{ Created by: Tanjim}
+
 { Contains all the array words in one file } 
 
 requires rnd
-
 
 : square dup * ;
 

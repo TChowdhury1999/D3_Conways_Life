@@ -20,6 +20,8 @@ variable index_y
   neighbours_array !
 ;
 
+make_n_array																{ creates the neighbours_array}
+
 { ON STACK: }
 
 : show_n_array

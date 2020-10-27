@@ -1,3 +1,7 @@
+{ Created by: Tanjim}
+
+{ Contains all the array words in one file } 
+
 requires rnd
 
 : square dup * ;
@@ -21,11 +25,19 @@ requires rnd
 : fill_random square 0 do 9 rnd over i + c! loop ;
 
 : fill_random_1s square 0 do 2 rnd over i + c! loop ;
+{ Made by : Tanjim Chowdhury}
+{ 23/10/2020}
+
+{ Initialise }
 
 variable life_array_1								{ make life_array_1 variable				}
-variable n 5 n !									{ save n 									}
+variable n 10 n !									{ save n 									}
 n @ make_Array life_array_1 !						{ allocate memory to life_array_1			}
 
+{ Created by: Tanjim Chowdhury
+  26/10/2020				   }
+  
+ 
 variable generations								{ Which generations the simulation is on				}
 0 generations !
 
@@ -54,6 +66,16 @@ variable measurements_id							{ file id for where measurements will be saved 		
 ;
 
 make_measurement_file
+{ Made by Tanjim
+  22/10/2020 }
+  
+{ Takes address of life_array_1 and n (for n by n array)
+  Assumes life_array_1 is stored in variable life_array_1
+  Assumes n is stored in variable n
+  Creates a n by n array called neighbours_array and puts in number of cells for each
+  index of the life_array_1 }
+  
+{ ON STACK: }
 
 variable neighbours_array
 variable index_x
@@ -174,7 +196,7 @@ make_n_array																{ creates the neighbours_array}
   then then then then
   loop ;
   
-: neighbour_rules                                  							
+  : neighbour_rules                                  							
 	case
 		0 of 0 endof
 		1 of 0 endof
@@ -198,8 +220,7 @@ make_n_array																{ creates the neighbours_array}
 		1 of 1 endof
 		2 of dup endof
 	endcase nip ;
-
-variable life_array_2
+	variable life_array_2
 
 
 : make_life_array_2 												{ makes life array 2}
@@ -224,6 +245,7 @@ make_life_array_2													{ makes life_array_2}
 	life_array_1 @ n @ square 0 fill
 ;
 
+  
 : second_gen 														{ use when calculating second generation}
   make_n_array														{ create and fill neighbour array       }
   fill_n_array
@@ -249,7 +271,6 @@ make_life_array_2													{ makes life_array_2}
   next_gen show_l_array												{ new life array on console           }
   drop drop
 ;
-
 variable life_array_32_bit												{ creates the 32 bit array	}
 n @ 2 * cells make_array												{ (2n)^2 = 4n^2 bytes needed}
 life_array_32_bit !														{ saves address to variable }
@@ -273,6 +294,49 @@ life_array_32_bit !														{ saves address to variable }
 			life_array_32_bit @ i cells + @ 4 .R 						{ prints each element from 32 bit   }
 		loop cr															{ array                             }
 ;
+
+: import_line													{ adds a line at x,y		}
+	rot															{ put a at front of stack	}
+	0 do														{ loop from 0 to a			}
+		life_array_1 @ n @ 1 4 pick i + 4 pick					{ address, n, 1, x+i, y     }
+		array_!													{ writes the 1 into array   }
+	loop drop drop
+;
+
+
+{ Puts a glider into the life_array_1 with x, y at top-left corner }
+{ requires variable n and life_array_1 and word array_!            }
+
+variable glider_x
+variable glider_y  
+
+: import_glider
+  glider_y !
+  glider_x !														{ saves x,y into the variables  }
+  life_array_1 @ n @ 1 glider_x @ 2 + glider_y @ array_!			{ changes values in life_array_1}
+  life_array_1 @ n @ 1 glider_x @ glider_y @ 1 + array_!			{ so a glider appears in the top}
+  life_array_1 @ n @ 1 glider_x @ 2 + glider_y @ 1 + array_!		{ left corner                   }
+  life_array_1 @ n @ 1 glider_x @ 1 + glider_y @ 2 + array_!
+  life_array_1 @ n @ 1 glider_x @ 2 + glider_y @ 2 + array_!		
+;
+
+{ Puts a square into life_array_1 with x, y at top-left corner
+  required x y before the word									}
+  
+: import_square														{ imports a square at x y	}
+	2 2 pick 2 pick													{ puts 2 x y on stack 	 	}
+	import_line														{ puts a 2 long line at x y }
+	2 2 pick 2 pick 1 +												{ puts 2 x y+1 on stack		}
+	import_line														{ puts another line below 	}
+	drop drop
+;
+
+
+: reset_l_array										{ Word to reset life_array_1 to all 0's}
+  life_array_1 @ n @ square 0 fill  							
+;
+
+
 : increment_generations												{ increments the generation number	}
 	generations @ 													{ get the generation number			}
 	1 + 															{ add one to the generation number  }
@@ -348,4 +412,11 @@ life_array_32_bit !														{ saves address to variable }
   0 died ! 															
 ;
 
+: is_empty															{ checks if life array is empty	}
+	count_alive_1 @ 0= if											{ if it is empty:				}
+		." Life Array is empty at generation" 						{ print the gen number			}
+		generations @ .				
+		1 1 import_square											{ import a square to stop crash }
+	then
+;
 

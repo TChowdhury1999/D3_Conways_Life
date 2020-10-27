@@ -25,4 +25,3 @@ requires rnd
 : fill_random square 0 do 9 rnd over i + c! loop ;
 
 : fill_random_1s square 0 do 2 rnd over i + c! loop ;
-

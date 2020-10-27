@@ -204,13 +204,13 @@ REQUIRES RND
 400 constant Update_Timer    { Sets update rate of windows - modest delay   }
                                { Smaller = faster refresh                     }
 
-25 Constant Rect_Size           { Length of edges of rectangle used to display }
+5 Constant Rect_Size           { Length of edges of rectangle used to display }
                                { life, must be >= 3 or blank display all balck}
 
 
-10  constant world_x_size     { x size of the world matrix }
+n @  constant world_x_size     { x size of the world matrix }
 
-10  constant world_y_size     { y size of the world matrix }
+n @  constant world_y_size     { y size of the world matrix }
 
 
 
@@ -229,16 +229,9 @@ world_size @ 1 + cells Allocate drop Life_Array !       { Allocate memory for Ar
 world_size @ 4 * 1 +  cells Allocate drop Rect_Points ! { Allocate memory for Array of rectangle data - size <n> x 4 + 1 }
 
 
-: Random_Life_Array_og               { Fills the Life_Array with random live / dead cells at each turn }
-  world_size @ 2 + 0 do           { For testing purposes only.                                      }
-  2 Rnd Life_Array @ i cells + !
-  loop
-; 
 
 fill_life_array_32_bit
 life_array_32_bit @ Life_array @ n @ square cells move
-
-
 
 life_array_1 @ life_array_2 @ n @ square move
 save_measurements

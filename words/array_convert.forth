@@ -14,7 +14,7 @@ life_array_32_bit !														{ saves address to variable }
 : fill_life_array_32_bit 												{ fills the 32 bit array	}
   n @ square 0 															{ loop from 0 to n^2		}
   do 
-	life_array_1 @ i + c@												{ get ith value from life_array_1}
+	life_array_2 @ i + c@												{ get ith value from life_array_2}
 	life_array_32_bit @ i cells + !										{ save this value into 32 bit 	 }
   loop																	{ loop 							 }
 ;

@@ -2,6 +2,12 @@
 Physics Year 3 lab experiment using Forth to investigate Conway's Life
 Tanjim Chowdhury
 
+30/10/2020
+
+IMPLEMENTATION OF CONWAYS LIFE IS LOCATED IN THE FOLDER LABELLED FINAL
+Folder containing words has been updated and shows the history of the files
+
+
 22/10/20
 
 Folder called words contains words made whilst learning Forth or otherwise which will be useful for creating Conway's Life

@@ -16,13 +16,13 @@ requires rnd
 
 : cube dup dup * * ;												{ cubes values}
 
-: make_array square dup allocate drop dup rot 0 fill ;				{ makes arrays}
+: make_array square dup allocate drop dup rot 0 fill ;				{ makes arrays, requires n for n by n array}
 
-: array_@ 1- 2 pick * over 1- + nip 2 pick + c@ nip nip ;			{ fetches from arrays}
+: array_@ 1- 2 pick * over 1- + nip 2 pick + c@ nip nip ;			{ fetches from arrays, requires address and n}
 
-: array_! 1- 3 pick * + 1- 3 pick + c! drop drop ;					{ writes to arrays}
+: array_! 1- 3 pick * + 1- 3 pick + c! drop drop ;					{ writes to arrays, requires address, n, value, x, y}
 
-: show_array dup													{ shows arrays}
+: show_array dup													{ shows arrays, requires address and n}
 	square 0 
 		do 
 			dup i swap mod 0= if 
@@ -213,13 +213,13 @@ make_n_array																{ creates the neighbours_array}
   returns 1 if cell will always be alive
   returns 2 if no effect }
   
-: neighbour_rules                                  							
-	case
+: neighbour_rules                                  							{ gets value input and outputs depending on case}
+	case																	{ made in this form to easily change rules		}
 		0 of 0 endof
 		1 of 0 endof
-		2 of 2 endof
-		3 of 1 endof
-		4 of 0 endof
+		2 of 2 endof														{ if input is 2, output is 2			}
+		3 of 1 endof														{ if input is 3, output is 1			}
+		4 of 0 endof														{ if input is any other value, output 0	}
 		5 of 0 endof
 		6 of 0 endof
 		7 of 0 endof
@@ -231,12 +231,13 @@ make_n_array																{ creates the neighbours_array}
   returns 0 if cell will be dead
   returns 1 if cell will be alive }
 
-: apply_rules neighbour_rules
+: apply_rules neighbour_rules												{ applies the classic Conways Life Rules}
 	case
 		0 of 0 endof
 		1 of 1 endof
 		2 of dup endof
 	endcase nip ;
+
 	
 { Made by: Tanjim Chowdhury
   Made on: 23/10/2020               

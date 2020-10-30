@@ -8,13 +8,13 @@ requires rnd
 
 : cube dup dup * * ;												{ cubes values}
 
-: make_array square dup allocate drop dup rot 0 fill ;				{ makes arrays}
+: make_array square dup allocate drop dup rot 0 fill ;				{ makes arrays, requires n for n by n array}
 
-: array_@ 1- 2 pick * over 1- + nip 2 pick + c@ nip nip ;			{ fetches from arrays}
+: array_@ 1- 2 pick * over 1- + nip 2 pick + c@ nip nip ;			{ fetches from arrays, requires address and n}
 
-: array_! 1- 3 pick * + 1- 3 pick + c! drop drop ;					{ writes to arrays}
+: array_! 1- 3 pick * + 1- 3 pick + c! drop drop ;					{ writes to arrays, requires address, n, value, x, y}
 
-: show_array dup													{ shows arrays}
+: show_array dup													{ shows arrays, requires address and n}
 	square 0 
 		do 
 			dup i swap mod 0= if 

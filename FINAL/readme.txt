@@ -7,7 +7,7 @@ NOTE:
 2) Please edit line 70 of 0_all since it contains a directory path specific to my PC.
 
 3) To test the life implementation:
-  a) can use x y import_glider to import a glider at (x,y) [ x and y must be above 0 and below 1]
+  a) can use x y import_glider to import a glider at (x,y) [ x and y must be above 0 and below 100]
   b) can use life_array_2 @ n @ fill_random_1s to fill the grid randomly
   or any other words that are mentioned in the files in this folder
   

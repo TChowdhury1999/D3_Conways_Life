@@ -6,6 +6,8 @@ Tanjim Chowdhury
 
 IMPLEMENTATION OF CONWAYS LIFE IS LOCATED IN THE FOLDER LABELLED FINAL
 
+PLEASE READ THE TEXT FILE IN THE FINAL FOLDER CALLED README.TXT
+
 Folder containing words has been updated and shows the history of the files
 
 
